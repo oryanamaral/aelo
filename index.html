@@ -922,24 +922,31 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:3rem 6v
     <div class="form-card fade-in">
       <h3>Agende seu diagnóstico gratuito</h3>
       <p>Preencha abaixo e entraremos em contato em até 1 hora útil.</p>
-      <form id="contact-form" onsubmit="submitForm(event)">
+      <form action="https://formsubmit.co/contatoaelodigital@gmail.com" method="POST">
+
+        <!-- FormSubmit config -->
+        <input type="hidden" name="_subject" value="🎯 Novo lead pelo site Aelo!">
+        <input type="hidden" name="_next" value="https://aelo.online/obrigado.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
         <div class="form-row">
           <div class="form-group">
             <label>Seu nome *</label>
-            <input type="text" placeholder="João Silva" required/>
+            <input type="text" name="Nome" placeholder="João Silva" required/>
           </div>
           <div class="form-group">
             <label>WhatsApp *</label>
-            <input type="tel" placeholder="(11) 99999-9999" required/>
+            <input type="tel" name="WhatsApp" placeholder="(11) 99999-9999" required/>
           </div>
         </div>
         <div class="form-group">
           <label>Nome da empresa *</label>
-          <input type="text" placeholder="Ex: Clínica Saúde Total" required/>
+          <input type="text" name="Empresa" placeholder="Ex: Clínica Saúde Total" required/>
         </div>
         <div class="form-group">
           <label>Segmento do negócio *</label>
-          <select required>
+          <select name="Segmento" required>
             <option value="">Selecione...</option>
             <option>Clínica / Consultório</option>
             <option>Restaurante / Alimentação</option>
@@ -956,7 +963,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:3rem 6v
         </div>
         <div class="form-group">
           <label>Qual é seu maior desafio hoje?</label>
-          <select>
+          <select name="Desafio">
             <option value="">Selecione...</option>
             <option>Pouco tráfego no site</option>
             <option>Não apareço no Google</option>
@@ -969,7 +976,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:3rem 6v
         <div class="form-row">
           <div class="form-group">
             <label>Melhor horário para contato</label>
-            <select>
+            <select name="Horário">
               <option>Manhã (8h–12h)</option>
               <option>Tarde (12h–18h)</option>
               <option>Qualquer horário</option>
@@ -977,7 +984,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:3rem 6v
           </div>
           <div class="form-group">
             <label>Orçamento mensal aproximado</label>
-            <select>
+            <select name="Orçamento">
               <option>Até R$ 1.000</option>
               <option>R$ 1.000 – R$ 2.500</option>
               <option>R$ 2.500 – R$ 5.000</option>
@@ -987,18 +994,7 @@ footer{background:var(--navy);border-top:1px solid var(--border);padding:3rem 6v
         </div>
         <button type="submit" class="btn-submit">🚀 Quero meu diagnóstico gratuito</button>
       </form>
-      <div class="form-success" id="form-success">
-        <div class="check-icon">🎉</div>
-        <h4>Recebemos seu contato!</h4>
-        <p>Entraremos em contato pelo WhatsApp em até 1 hora útil para agendar seu diagnóstico gratuito.</p>
-        <a href="https://wa.me/5515991709068?text=Ol%C3%A1!%20Acabei%20de%20preencher%20o%20formul%C3%A1rio%20no%20site%20da%20Aelo." class="btn-primary" style="margin-top:1.25rem;display:inline-flex" target="_blank">💬 Falar agora no WhatsApp</a>
-        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)">
-          <p style="font-size:.8rem;color:var(--gray2);margin-bottom:.6rem">Enquanto isso, nos siga no Instagram:</p>
-          <a href="https://instagram.com/aelo.ag" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--cyan);font-weight:600">
-            📸 @aelo.ag
-          </a>
-        </div>
-      </div>
+
     </div>
   </div>
 </section>
@@ -1465,32 +1461,7 @@ document.getElementById('mobile-menu').addEventListener('click', function(e) {
   if(e.target === this) closeMobileMenu();
 });
 
-// FORMULÁRIO
-function submitForm(e) {
-  e.preventDefault();
-  const form = document.getElementById('contact-form');
-  const success = document.getElementById('form-success');
-
-  // Montar mensagem WhatsApp com os dados
-  const nome = form.querySelector('input[type=text]').value;
-  const tel = form.querySelector('input[type=tel]').value;
-  const empresa = form.querySelectorAll('input[type=text]')[1]?.value || '';
-  const msg = encodeURIComponent(
-    `Olá! Vim pelo site da Aelo.\n\n` +
-    `👤 Nome: ${nome}\n` +
-    `📱 WhatsApp: ${tel}\n` +
-    `🏢 Empresa: ${empresa}\n\n` +
-    `Quero agendar meu diagnóstico gratuito!`
-  );
-
-  form.style.display = 'none';
-  success.style.display = 'block';
-
-  // Abre WhatsApp automaticamente após 1s
-  setTimeout(() => {
-    window.open('https://wa.me/5515991709068?text=' + msg, '_blank');
-  }, 800);
-}
+// Formulário gerenciado pelo FormSubmit — sem JS necessário
 
 </script>
 </body>
